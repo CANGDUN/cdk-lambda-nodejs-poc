@@ -1,8 +1,8 @@
 {
-  "name": "cdk-nodejs-poc",
+  "name": "cdk-lambda-nodejs-poc",
   "version": "0.1.0",
   "bin": {
-    "cdk-nodejs-poc": "bin/cdk-nodejs-poc.js"
+    "cdk-lambda-nodejs-poc": "bin/cdk-lambda-nodejs-poc.js"
   },
   "scripts": {
     "build": "tsc",
