@@ -1,11 +1,11 @@
 import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import * as CdkNodejsPoc from '../lib/cdk-nodejs-poc-stack';
+import * as CdkNodejsPoc from '../lib/stack';
 
 test('Empty Stack', () => {
     const app = new cdk.App();
     // WHEN
-    const stack = new CdkNodejsPoc.CdkNodejsPocStack(app, 'MyTestStack');
+    const stack = new CdkNodejsPoc.Stack(app, 'MyTestStack');
     // THEN
     expectCDK(stack).to(matchTemplate({
       "Resources": {}
