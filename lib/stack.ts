@@ -1,5 +1,6 @@
 import * as cdk from '@aws-cdk/core';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
+import * as iam from '@aws-cdk/aws-iam';
 
 export class Stack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -7,7 +8,17 @@ export class Stack extends cdk.Stack {
 
     // The code that defines your stack goes here
     new NodejsFunction(this, 'listHostedZonesByVPCFunc', {
-      entry: 'src/listHostedZonesByVPC.ts'
+      entry: 'src/listHostedZonesByVPC.ts',
+      environment: {
+        VPC_ID: this.node.tryGetContext('vpcId')
+      },
+      initialPolicy: [new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW, 
+        actions: [
+          'route53:listHostedZonesByVPC',
+          'ec2:describeVpcs'
+        ]
+      })]
     })
   }
 }

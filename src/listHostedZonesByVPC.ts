@@ -8,7 +8,7 @@ interface FuncResponse{
 const route53 = new Route53();
 
 const params: AWS.Route53.ListHostedZonesByVPCRequest = {
-    VPCId: 'vpc-xxxxxxxxxxxxxxxxx',
+    VPCId: process.env.VPC_ID || '',
     VPCRegion: 'ap-northeast-1'
 };
 
@@ -16,11 +16,10 @@ export async function handler() {
     const response: FuncResponse = {};
 
     try {
-        const data = route53.listHostedZonesByVPC(params).promise();
+        const data = await route53.listHostedZonesByVPC(params).promise();
         console.log(data);
         response.statusCode = 200;
         response.data = JSON.stringify(data);
-        
     } catch (error) {
         console.error(error, error.stack);
         response.statusCode =  error.statusCode;
