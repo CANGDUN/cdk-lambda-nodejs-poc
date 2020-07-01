@@ -12,6 +12,7 @@ export class Stack extends cdk.Stack {
       environment: {
         VPC_ID: this.node.tryGetContext('vpcId')
       },
+      timeout: cdk.Duration.seconds(15),
       initialPolicy: [new iam.PolicyStatement({
         effect: iam.Effect.ALLOW, 
         actions: [
